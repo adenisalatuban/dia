@@ -1,0 +1,18 @@
+<button onclick="myFunction()">permission mail</button>
+
+<script>
+function myFunction() {
+    var x = window;
+
+    setTimeout(function() {
+        x.document.write(`
+            <h1>ext protocol permission</h1>
+
+            <script>
+            
+                window.location.href = "mailto:hajinaim@gmail.com";
+            <\/script>
+        `);
+    }, 2400);
+}
+</script>
