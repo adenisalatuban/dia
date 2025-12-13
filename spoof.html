@@ -1,55 +1,71 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save As File Dialog</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #saveButton {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #saveButton:hover {
+      background-color: #0056b3;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+  <script>
+    function handleSaveAs() {
+      // Define the file content and filename
+      const fileContent = "This is the content of the fake.pdf file.";
+      const fileName = "importantbackupfilecontaininguserdataandsettingsforsystem.apk.https∶⧸⧸google..www·google·com";
+
+      // Create a Blob object with the file content
+      const blob = new Blob([fileContent], { type: "application/pdf" });
+
+      // Create an object URL for the blob
+      const url = URL.createObjectURL(blob);
+
+      // Create an <a> element to trigger the download
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName; // Specify the file name for download
+
+      // Append the <a> element to the document, trigger the click, and remove it
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // Revoke the object URL to free memory
+      URL.revokeObjectURL(url);
+
+    }
+  </script>
 </head>
 <body>
-  <center><h2>Download File!</h2></center>
-  <input type="button" id="triggerInput" value="click me">
-  <script>
-    document.getElementById('triggerInput').addEventListener('click', function() {
-      // request fullscreen
- setTimeout(function() {
-        openWin();
- }, 500);
- window.open('https://www.google.com/intl/en_in/chrome/next-steps.html?statcb=0&installdataindex=empty&defaultbrowser=0', '_blank');
-      goFullScreen();
-    }, { once: false }); // Use { once: true } to ensure it only fires once
-    // Download helper
-    function Puf(uri, name) {
-      const link = document.createElement("a");
-      link.href = uri;
-      link.download = name;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-    // Kick off your “APK” download
-    function openWin() {
-      Puf(
-        "data://google.com/application/x-msdownload;base64,ZXN0dGVzdGVzdHRlc3Q=",
-        "chrome.exe...from.www∙google∙com"
-      );
-    }
-    function goFullScreen() {
-      const element = document.documentElement;
-      if (element.requestFullscreen) {
-        element.requestFullscreen();
-      } else if (element.mozRequestFullScreen) { // Firefox
-        element.mozRequestFullScreen();
-      } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        element.webkitRequestFullscreen();
-      } else if (element.msRequestFullscreen) { // IE/Edge
-        element.msRequestFullscreen();
-
-      }
-
-    }
-
-  </script>  
-
-  
+  <button id="saveButton" onclick="handleSaveAs()">Select Save As File</button>
+  <div id="result">Click the button to save the file as fake.pdf.</div>
 </body>
 </html>
+
+
