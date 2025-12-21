@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+function a(event){
+  event.preventDefault(); 
+
+  open = ('https://google.com', 'x');
+
+  setTimeout(function(){
+    location = 'https://testsafebrowsing.appspot.com/s/malware.html', 'x';
+  }, 1000);
+}
+</script>
+
+<center>
+  <a href="#" class="button" onclick="a(event)">Click me!</a>
+</center>
+
+</body>
+</html>
