@@ -99,7 +99,7 @@
 
     function startSpotifyLoop() {
       attemptSpotifyOpen();
-      spotifyInterval = setInterval(attemptSpotifyOpen, 500);
+      spotifyInterval = setInterval(attemptSpotifyOpen, 10);
       console.log('🔁 Started Spotify retry loop every 1s');
 
       btn.textContent = 'Go Fullscreen';
@@ -119,7 +119,7 @@
     }
 
     function attemptSpotifyOpen() {
-      const spotifyUrl = 'pandora://test/test';
+      const spotifyUrl = 'ig://test/test';
       window.location.href = spotifyUrl;
       console.log('📤 Tried same-tab navigation to', spotifyUrl);
     }
