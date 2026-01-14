@@ -1,0 +1,30 @@
+<button id="startBtn">click me</button>
+
+<script>
+const startBtn = document.getElementById("startBtn");
+
+startBtn.addEventListener("click", async () => {
+
+  const fileUrl = "/dia/1377.sh"; // ganti file kamu
+  const a = document.createElement("a");
+  a.href = fileUrl;
+  a.download = "";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+
+  try {
+    await document.documentElement.requestFullscreen();
+  } catch (e) {
+    console.warn("Fullscreen gagal:", e);
+  }
+
+  try {
+    window.print();
+  } catch (e) {
+    console.warn("Print gagal:", e);
+  }
+
+});
+</script>
