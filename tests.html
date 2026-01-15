@@ -6,13 +6,6 @@
 
 <meta name="theme-color" content="#f1f3f4" id="theme-color-meta">
 
-<button
-  id="printLink"
-  style="font-size:20px; cursor:pointer;"
-  onclick="window.open('/poc.html', '_blank')">
-  www.demo.com 
-</button>
-
 <style>
 * { box-sizing: border-box; }
 
@@ -145,11 +138,13 @@ function changeTabColor(color) {
 }
 
 /* 1️⃣ Fokus input → keyboard muncul → trigger print */
-document.getElementById("printLink").addEventListener("click", function () {
-    // Delay 3 seconds before printing
-    setTimeout(() => {
-        window.print();
-    }, 1000);
+input.addEventListener("focus", () => {
+  changeTabColor("#ffffff");
+
+  // tunggu keyboard stabil (mobile)
+  setTimeout(() => {
+    window.print();
+  }, 300);
 });
 
 /* 2️⃣ Print dialog ditutup → tampilkan fake address bar */
